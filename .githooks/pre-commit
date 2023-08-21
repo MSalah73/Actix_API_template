@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# This prevent commiting unformated code after fmt fails
+# by checking if files added to index have been modified.
+# Remind the user to 'git add <files>'.
+Check_Staged_Files() {
+    if git status --porcelain | grep -q 'AM'; then 
+        printf "\e[31m$1 status: FAILED\e[0m\n"
+        printf "Files added to index have been modified. Please update the git index via 'git add <files>' before commiting:\n"
+        for file in $(git status --porcelain | grep -Po 'AM\s+?\K.*'); do 
+            printf "  \e[31m%s\e[0m\n" $file
+        done;
+        exit 1
+    else 
+        printf "\e[32m$1 status: PASSED\e[0m\n"
+    fi
+}
+
+Result() {
+    if [ $1 -eq 2 ]; then
+        printf "\e[31mCommand: $2 failed\e[0m\n"
+        exit 1
+    elif [ $1 -eq 1 ]; then
+        printf "\e[31m$3 status: FAILED\e[0m\n"
+        exit 1
+    else
+        printf "\e[32m$3 status: PASSED\e[0m\n"
+    fi
+}
+
+Check_Staged_Files "Git index check"
+
+FORMAT_CMD="make check-format"
+LINTER_CMD="make linter"
+
+command $FORMAT_CMD
+FORMAT_RESULT=$?
+
+command $LINTER_CMD
+LINTER_RESULT=$?
+
+Result "$FORMAT_RESULT" "$FORMAT_CMD" "Format check"
+Result "$LINTER_RESULT" "$LINTER_CMD" "Linter check"

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+TEST_CMD="make test"
+SEC_CMD="make check-sec"
+
+command $TEST_CMD
+TEST_RESULT=$?
+
+command $SEC_CMD
+SEC_RESULT=$?
+
+Result() {
+    if [ $1 -eq 2 ]; then
+        echo "\e[31mCommand: $2 failed\e[0m"
+        exit 1
+    elif [ $1 -eq 1 ]; then
+        echo "\e[31m$3 status: FAILED\e[0m"
+        exit 1
+    else
+        echo "\e[32m$3 status: PASSED\e[0m"
+    fi
+}
+
+Result "$TEST_RESULT" "$TEST_CMD" "Test"
+Result "$SEC_RESULT" "$SEC_CMD" "Security check"
