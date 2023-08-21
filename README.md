@@ -1,7 +1,7 @@
 # Actix API template
 ## Basic actix based skeleton with few niceties
 [![build status](https://github.com/Msalah73/actix_api_template/actions/workflows/general-ci-pipeline.yml/badge.svg?branch=master)](https://github.com/Msalah73/actix_api_template/actions/workflows/general-ci-pipeline.yml/)
-[![Coverage Status](https://coveralls.io/repos/github/MSalah73/actix_api_template/badge.svg?branch=master)](https://coveralls.io/github/MSalah73/actix_api_template?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/MSalah73/Actix_API_template/badge.svg?branch=master)](https://coveralls.io/github/MSalah73/Actix_API_template?branch=master)
 [![dependency status](https://deps.rs/repo/github/Msalah73/actix_api_template/status.svg)](https://deps.rs/repo/github/Msalah73/actix_api_template)
 
 The template has essential features:
