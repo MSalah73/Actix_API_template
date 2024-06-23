@@ -1,5 +1,5 @@
 mod example;
-mod health_check;
+mod health_status;
 
 pub use example::*;
-pub use health_check::*;
+pub use health_status::*;

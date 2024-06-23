@@ -1,5 +1,5 @@
 use crate::configuration::Settings;
-use crate::routes::example;
+use crate::routes::example_fn;
 use crate::routes::health_check;
 use actix_web::dev::Server;
 use actix_web::{web, App, HttpServer};
@@ -49,7 +49,7 @@ pub async fn run(listener: TcpListener, base_url: reqwest::Url) -> Result<Server
         App::new()
             .wrap(TracingLogger::default())
             .service(health_check)
-            .service(example)
+            .service(example_fn)
             .app_data(base_url.clone())
     })
     .listen(listener)?

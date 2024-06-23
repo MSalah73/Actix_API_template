@@ -60,7 +60,7 @@ impl From<String> for ExampleError {
         query = %query.name,
     )
 )]
-async fn example(query: web::Query<QueryParams>) -> Result<HttpResponse, ExampleError> {
+async fn example_fn(query: web::Query<QueryParams>) -> Result<HttpResponse, ExampleError> {
     // whichever works
     let name: Name = query.0.try_into()?;
     //let name = Name::try_from(query.0)?;
